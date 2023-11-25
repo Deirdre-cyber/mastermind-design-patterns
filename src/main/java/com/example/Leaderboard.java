@@ -40,7 +40,7 @@ public class Leaderboard {
         }
     }
 
-    private int calculateScore(Player player, int movesLeft, GameDifficulty difficulty) {
+    int calculateScore(Player player, int movesLeft, GameDifficulty difficulty) {
 
         int difficultyBonus = 0;
         int score = movesLeft * 1000;

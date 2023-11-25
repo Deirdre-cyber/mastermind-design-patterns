@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 
-class GameModeTest {
+public class GameModeTest {
 
     @Test
-    void testInitializeSolution() {
+    public void testInitializeSolution() {
         GameMode gameMode = new GameMode(GameDifficulty.CLASSIC, new Player("Player1", PlayerType.HUMAN), new Player("Player2", PlayerType.COMPUTER));
         gameMode.initializeSolution(GameDifficulty.CLASSIC);
         assertNotNull(gameMode.getSolution());
@@ -16,7 +16,7 @@ class GameModeTest {
     }
 
     @Test
-    void testCompareCode() {
+    public void testCompareCode() {
         GameMode gameMode = new GameMode(GameDifficulty.CLASSIC, new Player("Player1", PlayerType.HUMAN), new Player("Player2", PlayerType.COMPUTER));
         gameMode.initializeSolution(GameDifficulty.CLASSIC);
         char[] solution = gameMode.getSolution();
@@ -37,7 +37,7 @@ class GameModeTest {
     }
 
     @Test
-    void testCheckWin() {
+    public void testCheckWin() {
         GameMode gameMode = new GameMode(GameDifficulty.CLASSIC, new Player("Player1", PlayerType.HUMAN), new Player("Player2", PlayerType.COMPUTER));
         gameMode.initializeSolution(GameDifficulty.CLASSIC);
 
