@@ -62,7 +62,7 @@ public class Leaderboard {
         return score + difficultyBonus;
     }
 
-    void displayLeaderboard() {
+    public void displayLeaderboard() {
         int boxWidth = 30;
     
         printBorder(boxWidth);
