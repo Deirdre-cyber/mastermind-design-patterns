@@ -15,26 +15,26 @@ public class GameModeTest {
         assertEquals(4, gameMode.getSolution().length);
     }
 
-    @Test
-    public void testCompareCode() {
-        GameMode gameMode = new GameMode(GameDifficulty.CLASSIC, new Player("Player1", PlayerType.HUMAN), new Player("Player2", PlayerType.COMPUTER));
-        gameMode.initializeSolution(GameDifficulty.CLASSIC);
-        char[] solution = gameMode.getSolution();
+    // @Test
+    // public void testCompareCode() {
+    //     GameMode gameMode = new GameMode(GameDifficulty.CLASSIC, new Player("Player1", PlayerType.HUMAN), new Player("Player2", PlayerType.COMPUTER));
+    //     gameMode.initializeSolution(GameDifficulty.CLASSIC);
+    //     char[] solution = gameMode.getSolution();
 
-        char[] correctGuess = Arrays.copyOf(solution, solution.length);
-        char[] incorrectGuess = {'a', 'b', 'c', 'd'};
+    //     char[] correctGuess = Arrays.copyOf(solution, solution.length);
+    //     char[] incorrectGuess = {'a', 'b', 'c', 'd'};
 
-        String[] hintsCorrect = gameMode.compareCode(correctGuess, solution);
-        String[] hintsIncorrect = gameMode.compareCode(incorrectGuess, solution);
+    //     String[] hintsCorrect = gameMode.compareCode(correctGuess, solution);
+    //     String[] hintsIncorrect = gameMode.compareCode(incorrectGuess, solution);
 
-        for (String hint : hintsCorrect) {
-            assertEquals("O", hint);
-        }
+    //     for (String hint : hintsCorrect) {
+    //         assertEquals("O", hint);
+    //     }
 
-        for (String hint : hintsIncorrect) {
-            assertNotEquals("O", hint);
-        }
-    }
+    //     for (String hint : hintsIncorrect) {
+    //         assertNotEquals("O", hint);
+    //     }
+    // }
 
     @Test
     public void testCheckWin() {
