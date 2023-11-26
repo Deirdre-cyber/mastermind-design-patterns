@@ -18,9 +18,9 @@ jobs:
         with:
           java-version: 17
           distribution: 'zulu' # Alternative distribution options are available.
-      - name: Build with Maven
+      - name: Build and Package with Maven
         run: mvn -B package --file pom.xml
-      - name: Build with Maven
+      - name: Run Maven Clean and Verify
         run: mvn clean verify
       - name: Run Tests
         run: mvn test
