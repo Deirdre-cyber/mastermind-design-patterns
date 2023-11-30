@@ -6,14 +6,24 @@ import java.util.Collections;
 import java.util.List;
 
 public class Leaderboard {
+    private static Leaderboard instance;
+
     private List<PlayerScore> scores;
+
     private static final String CSV_HEADER = "Player,Score";
     private static final String CSV_FILE_PATH = "leaderboard.csv";
 
 
-    public Leaderboard() {
+    private Leaderboard() {
         this.scores = new ArrayList<>();
         loadLeaderboard();
+    }
+
+    public static Leaderboard getInstance(){
+        if (instance == null) {
+            instance = new Leaderboard();
+        }
+        return instance;
     }
 
     public void update(Player playerOne, Player playerTwo) {
@@ -94,7 +104,6 @@ public class Leaderboard {
         System.out.println();
     }
     
-
     private void loadLeaderboard() {
         boolean skipFirstLine = true;
         try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
@@ -139,6 +148,7 @@ public class Leaderboard {
             System.err.println("Error saving leaderboard: " + e.getMessage());
         }
     }
+    
     private static class PlayerScore implements Comparable<PlayerScore> {
         private String playerName;
         private int score;

@@ -27,7 +27,7 @@ public class Main {
                 System.out.println("Let's play " + playerOne.getName() + " and " + playerTwo.getName() + "!");
                 System.out.println("-----------------------------------");
 
-                Leaderboard leaderboard = new Leaderboard();
+                Leaderboard leaderboard = Leaderboard.getInstance();
 
                 game = new Game(playerOne, playerTwo, gameMode, leaderboard);
 

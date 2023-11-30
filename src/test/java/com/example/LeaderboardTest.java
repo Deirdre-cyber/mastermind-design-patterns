@@ -9,10 +9,12 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class LeaderboardTest {
+    
+    Leaderboard leaderboard = Mockito.spy(Leaderboard.getInstance());
 
     @Test
     public void testUpdateLeaderboard() {
-        Leaderboard leaderboard = Mockito.spy(new Leaderboard());
+        
 
         Player playerOne = Mockito.mock(Player.class);
         Player playerTwo = Mockito.mock(Player.class);
@@ -36,7 +38,6 @@ public class LeaderboardTest {
 
     @Test
     public void testCalculateScore() {
-        Leaderboard leaderboard = new Leaderboard();
 
         Player player = new Player("Bob", PlayerType.HUMAN);
         GameMode gameMode = new GameMode(GameDifficulty.CHILDREN, player, null);
