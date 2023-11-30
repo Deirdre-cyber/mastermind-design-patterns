@@ -4,9 +4,12 @@ package com.example;
 import java.util.Scanner;
 
 public class Main {
+
+    private static final String LINE_SEPERATOR = "-----------------------------------";
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Game game = null;
+        
 
         while (game == null) {
             try {
@@ -14,18 +17,24 @@ public class Main {
 
                 GameDifficulty gameDifficulty = chooseGameDifficulty(scanner);
 
+                PlayerFactory humanPlayerFactory = new HumanPlayerFactory();
                 String playerOneName = choosePlayerName(scanner);
-                Player playerOne = new Player(playerOneName, PlayerType.HUMAN);
-                System.out.println("-----------------------------------");
+                Player playerOne = humanPlayerFactory.createPlayer(playerOneName);
+
+
+                System.out.println(LINE_SEPERATOR);
+
+
+                PlayerFactory computerPlayerFactory = new ComputerPlayerFactory();
                 String playerTwoName = generatePlayerName();
-                Player playerTwo = new Player(playerTwoName, PlayerType.COMPUTER);
+                Player playerTwo = computerPlayerFactory.createPlayer(playerTwoName);
 
                 GameMode gameMode = new GameMode(gameDifficulty, playerOne, playerTwo);
                 
                 playerOne.setGameMode(gameMode);
                 playerTwo.setGameMode(gameMode);
                 System.out.println("Let's play " + playerOne.getName() + " and " + playerTwo.getName() + "!");
-                System.out.println("-----------------------------------");
+                System.out.println(LINE_SEPERATOR);
 
                 Leaderboard leaderboard = Leaderboard.getInstance();
 
@@ -42,7 +51,7 @@ public class Main {
     private static GameDifficulty chooseGameDifficulty(Scanner scanner) {
         System.out.println("Enter game difficulty ((CH)ILDREN, (CL)ASSIC, (E)XPERT):");
         String input = scanner.nextLine().toUpperCase();
-        System.out.println("-----------------------------------");
+        System.out.println(LINE_SEPERATOR);
         GameDifficulty gameDifficulty;
 
         switch (input) {
