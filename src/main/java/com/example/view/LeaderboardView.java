@@ -20,6 +20,7 @@ public class LeaderboardView {
         }
     
         printBorder(boxWidth);
+        
     }
     
     public void printRow(String label, String value, int boxWidth) {

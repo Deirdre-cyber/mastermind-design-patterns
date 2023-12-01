@@ -8,7 +8,6 @@ public class GameView {
 
     private static final String LINE_SEPERATOR = "-----------------------------------";
 
-    // set as singleton
 
     public void displayWelcomeMessage() {
         System.out.println("Welcome to");
@@ -95,7 +94,7 @@ public class GameView {
         System.out.println();
     }
 
-        public void displayResult(GameMode gameMode, char[] solution) {
+    public void displayResult(GameMode gameMode, char[] solution) {
         if (gameMode.isGameFinished()) {
             if (gameMode.getGameIsWon()) {
                 System.out.println("Congratulations! You won!");
@@ -110,6 +109,5 @@ public class GameView {
             System.out.println("Game is not finished yet!");
         }
     }
-
 
 }

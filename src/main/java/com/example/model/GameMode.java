@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.example.controller.GameController;
+import com.example.controller.PlayerController;
 import com.example.view.GameView;
 
 public class GameMode {
@@ -115,16 +116,18 @@ public class GameMode {
     public void makeMove(Player player) {
         char[] guess;
         String[] hints;
+        PlayerController playerController = new PlayerController(this);
 
         if (player.getPlayerType() == PlayerType.HUMAN) {
-            player.makeMove();
+            
+            playerController.makeMove(player);
             guess = player.getLastMove();
             hints = compareCode(guess, solution);
             gameView.displayGuessesAndHints(guess, hints);
         } else {
             gameView.getLineSeperator();
             System.out.println("Computer " + player.getName() + " is making a move...");
-            guess = player.generateRandomMove();
+            guess = playerController.generateRandomMove();
             hints = compareCode(guess, solution);
             gameView.displayGuessesAndHints(guess, hints);
         }

@@ -75,8 +75,6 @@ public class Leaderboard {
         return score + difficultyBonus;
     }
 
-    
-    
     private void loadLeaderboard() {
         boolean skipFirstLine = true;
         try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
