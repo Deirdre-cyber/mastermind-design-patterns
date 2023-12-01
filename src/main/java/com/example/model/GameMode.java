@@ -1,15 +1,11 @@
-package com.example;
+package com.example.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-enum GameDifficulty {
-    CHILDREN,
-    CLASSIC,
-    EXPERT
-}
+import com.example.view.GameView;
 
 public class GameMode {
     private String name;
@@ -23,8 +19,9 @@ public class GameMode {
     private GameDifficulty difficulty;
     private Player playerOne;
     private Player playerTwo;
+    private GameView gameView;
 
-    public GameMode(GameDifficulty difficulty, Player playerOne, Player playerTwo) {
+    public GameMode(GameDifficulty difficulty, Player playerOne, Player playerTwo, GameView gameView) {
         this.difficulty = difficulty;
         this.name = difficulty.toString();
         this.gameIsWon = false;
@@ -32,6 +29,7 @@ public class GameMode {
         this.movesLeft = 0;
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
+        this.gameView = gameView;
 
     }
 
@@ -43,11 +41,32 @@ public class GameMode {
         return currentTurn;
     }
 
+    public boolean isGameFinished() {
+        return gameIsWon || movesLeft == 0;
+    }
+
+    public void updateTurn() {
+        currentTurn++;
+    }
+
+    public int getMovesLeft() {
+        return movesLeft;
+    }
+
+    public Player getPlayerOne() {
+        return playerOne;
+    }
+
+    public char[] getSolution() {
+        return solution;
+    }
+
     public void startGame() {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Starting game mode: " + name);
-        System.out.println("-----------------------------------");
+        gameView.getLineSeperator();
+        
         do {
             System.out.println("Enter the number of games (1 - 10):");
             while (!scanner.hasNextInt()) {
@@ -56,7 +75,7 @@ public class GameMode {
             }
             this.numGames = scanner.nextInt();
         } while (this.numGames < 1 || this.numGames > 10);
-        System.out.println("-----------------------------------");
+        gameView.getLineSeperator();
         do {
             System.out.println("Enter the number of guesses (1 - 10):");
             while (!scanner.hasNextInt()) {
@@ -65,7 +84,7 @@ public class GameMode {
             }
             this.numGuesses = scanner.nextInt();
         } while (this.numGuesses < 1 || this.numGuesses > 10);
-        System.out.println("-----------------------------------");
+        gameView.getLineSeperator();
         movesLeft = numGuesses;
 
         for (int i = 0; i < numGames && !isGameFinished(); i++) {
@@ -91,20 +110,20 @@ public class GameMode {
     public void makeMove(Player player) {
         char[] guess;
         String[] hints;
-    
+
         if (player.getPlayerType() == PlayerType.HUMAN) {
             player.makeMove();
             guess = player.getLastMove();
             hints = compareCode(guess, solution);
             displayGuessesAndHints(guess, hints);
         } else {
-            System.out.println("-----------------------------------");
-            System.out.println("Computer " + player.getName()+ " is making a move...");
+            gameView.getLineSeperator();
+            System.out.println("Computer " + player.getName() + " is making a move...");
             guess = player.generateRandomMove();
             hints = compareCode(guess, solution);
             displayGuessesAndHints(guess, hints);
         }
-    
+
         if (!isGameFinished()) {
             if (player == playerOne) {
                 makeMove(playerTwo);
@@ -114,60 +133,56 @@ public class GameMode {
             }
         }
     }
-    
-    
-    
+
     public void displayGuessesAndHints(char[] guess, String[] hints) {
         int boxWidth = 30;
-    
+
         printBorder(boxWidth);
-    
+
         printRow("Guess:", guess, boxWidth);
-    
+
         printRow("Hints:", hints, boxWidth);
-    
+
         printBorder(boxWidth);
-    
+
         System.out.println("O = correct colour, correct position");
         System.out.println("X = correct colour, wrong position");
         System.out.println("_ = wrong colour");
         System.out.println();
     }
-    
+
     private void printRow(String label, char[] data, int boxWidth) {
         System.out.print("| " + label + " ");
         for (char c : data) {
             System.out.print(c + " ");
         }
-    
+
         for (int i = label.length() + data.length * 2 + 2; i < boxWidth - 1; i++) {
             System.out.print(" ");
         }
-    
+
         System.out.println("|");
     }
-    
+
     private void printRow(String label, String[] data, int boxWidth) {
         System.out.print("| " + label + " ");
         for (String value : data) {
             System.out.print(value + " ");
         }
-    
+
         for (int i = label.length() + data.length * 2 + 2; i < boxWidth - 1; i++) {
             System.out.print(" ");
         }
-    
+
         System.out.println("|");
     }
-    
+
     private void printBorder(int boxWidth) {
         for (int i = 0; i < boxWidth; i++) {
             System.out.print("-");
         }
         System.out.println();
     }
-    
-    
 
     public void initializeSolution(GameDifficulty difficulty) {
         switch (difficulty) {
@@ -210,15 +225,12 @@ public class GameMode {
         if (checkWin(hints)) {
             gameIsWon = true;
         }
-
-        
         updateTurn();
-
     }
 
     public String[] compareCode(char[] guess, char[] solution) {
         String[] hints = new String[guess.length];
-    
+
         for (int i = 0; i < guess.length; i++) {
             if (guess[i] == solution[i]) {
                 hints[i] = "O";
@@ -240,11 +252,10 @@ public class GameMode {
                 hints[i] = "_";
             }
         }
-    
+
         return hints;
     }
-    
-    
+
     public boolean checkWin(String[] hints) {
         for (String hint : hints) {
             if (!hint.equals("O")) {
@@ -254,55 +265,19 @@ public class GameMode {
         return true;
     }
 
-    public boolean isGameFinished() {
-        return gameIsWon || movesLeft == 0;
-    }
-
-    public void updateTurn() {
-        currentTurn++;
-    }
-
     public void displayResult() {
         if (isGameFinished()) {
             if (gameIsWon) {
                 System.out.println("Congratulations! You won!");
             } else {
                 System.out.println("Game over. You lost!");
-                if(!gameIsWon){
-                   System.out.println("Correct answer was: ");
-                    displayInBox(Arrays.toString(solution));
+                if (!gameIsWon) {
+                    System.out.println("Correct answer was: ");
+                    gameView.displayInBox(Arrays.toString(solution));
                 }
             }
         } else {
             System.out.println("Game is not finished yet!");
         }
     }
-
-    private void displayInBox(String content) {
-        int length = content.length();
-        printLine(length);
-        System.out.println("| " + content + " |");
-        printLine(length);
-    }
-
-    private void printLine(int length) {
-        System.out.print("+");
-        for (int i = 0; i < length + 2; i++) {
-            System.out.print("-");
-        }
-        System.out.println("+");
-    }
-
-    public int getMovesLeft() {
-        return movesLeft-1;
-    }
-
-    public Player getPlayerOne() {
-        return playerOne;
-    }
-
-    public char[] getSolution() {
-        return solution;
-    }
-
 }

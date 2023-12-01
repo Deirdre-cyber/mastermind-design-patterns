@@ -1,4 +1,5 @@
 com\example\Game.class
+com\example\HumanPlayerFactory.class
 com\example\Player.class
 com\example\Main.class
 com\example\Player$1.class
@@ -7,5 +8,7 @@ com\example\Leaderboard.class
 com\example\Leaderboard$PlayerScore.class
 com\example\Leaderboard$1.class
 com\example\GameMode$1.class
+com\example\PlayerFactory.class
 com\example\GameDifficulty.class
+com\example\ComputerPlayerFactory.class
 com\example\PlayerType.class

@@ -3,6 +3,11 @@ package com.example;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import com.example.model.Game;
+import com.example.model.GameMode;
+import com.example.model.Leaderboard;
+import com.example.model.Player;
+
 import static org.mockito.Mockito.*;
 
 public class GameTest {

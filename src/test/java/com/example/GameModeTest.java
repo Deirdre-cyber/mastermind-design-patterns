@@ -1,7 +1,15 @@
 package com.example;
 
 import org.junit.jupiter.api.Test;
+
+import com.example.model.GameDifficulty;
+import com.example.model.GameMode;
+import com.example.model.Player;
+import com.example.model.PlayerType;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 
@@ -15,26 +23,20 @@ public class GameModeTest {
         assertEquals(4, gameMode.getSolution().length);
     }
 
-    // @Test
-    // public void testCompareCode() {
-    //     GameMode gameMode = new GameMode(GameDifficulty.CLASSIC, new Player("Player1", PlayerType.HUMAN), new Player("Player2", PlayerType.COMPUTER));
-    //     gameMode.initializeSolution(GameDifficulty.CLASSIC);
-    //     char[] solution = gameMode.getSolution();
+        @Test
+    public void testCompareCode() {
+        
+        Player player = mock(Player.class);
+        GameMode gameMode = new GameMode(GameDifficulty.CLASSIC, player, player);
+        gameMode.initializeSolution(GameDifficulty.CLASSIC);
 
-    //     char[] correctGuess = Arrays.copyOf(solution, solution.length);
-    //     char[] incorrectGuess = {'a', 'b', 'c', 'd'};
+        when(player.getLastMove()).thenReturn(new char[]{'a', 'b', 'c', 'd'});
+        char[] solution = new char[]{'e','f','g','h'};
+        String[] hints = gameMode.compareCode(player.getLastMove(), solution);
 
-    //     String[] hintsCorrect = gameMode.compareCode(correctGuess, solution);
-    //     String[] hintsIncorrect = gameMode.compareCode(incorrectGuess, solution);
+        assertArrayEquals(new String[]{"_", "_", "_", "_"}, hints);
+    }
 
-    //     for (String hint : hintsCorrect) {
-    //         assertEquals("O", hint);
-    //     }
-
-    //     for (String hint : hintsIncorrect) {
-    //         assertNotEquals("O", hint);
-    //     }
-    // }
 
     @Test
     public void testCheckWin() {
