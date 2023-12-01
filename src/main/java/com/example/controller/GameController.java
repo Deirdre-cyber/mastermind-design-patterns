@@ -8,12 +8,13 @@ import com.example.view.GameView;
 public class GameController {
 
     private GameView gameView;
+    private Scanner scanner = new Scanner(System.in);
 
     public GameController(GameView gameView) {
         this.gameView = gameView;
     }
 
-    public GameDifficulty chooseGameDifficulty(Scanner scanner) {
+    public GameDifficulty chooseGameDifficulty() {
         System.out.println("Enter game difficulty ((CH)ILDREN, (CL)ASSIC, (E)XPERT):");
         String input = scanner.nextLine().toUpperCase();
 
@@ -39,13 +40,12 @@ public class GameController {
         return gameDifficulty;
     }
 
-    public String choosePlayerName(Scanner scanner) {
+    public String choosePlayerName() {
         System.out.println("Enter player one name:");
         return scanner.nextLine();
     }
 
     public int promptForNumberOfGames() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the number of games (1 - 10):");
         while (!scanner.hasNextInt()) {
             System.out.println("Invalid input. Please enter a number between 1 and 10.");
@@ -56,7 +56,6 @@ public class GameController {
     }
 
     public int promptForNumberOfGuesses() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the number of guesses (1 - 10):");
         while (!scanner.hasNextInt()) {
             System.out.println("Invalid input. Please enter a number between 1 and 10.");

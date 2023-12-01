@@ -1,8 +1,6 @@
 
 package com.example;
 
-import java.util.Scanner;
-
 import com.example.controller.GameController;
 import com.example.model.ComputerPlayerFactory;
 import com.example.model.Game;
@@ -17,7 +15,6 @@ import com.example.view.GameView;
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         Game game = null;
         GameView gameView = new GameView();
         GameController gameController = new GameController(gameView);
@@ -27,10 +24,10 @@ public class Main {
             try {
                 gameView.displayWelcomeMessage();
 
-                GameDifficulty gameDifficulty = gameController.chooseGameDifficulty(scanner);
+                GameDifficulty gameDifficulty = gameController.chooseGameDifficulty();
 
                 PlayerFactory humanPlayerFactory = new HumanPlayerFactory();
-                String playerOneName = gameController.choosePlayerName(scanner);
+                String playerOneName = gameController.choosePlayerName();
                 Player playerOne = humanPlayerFactory.createPlayer(playerOneName);
 
                 gameView.getLineSeperator();
