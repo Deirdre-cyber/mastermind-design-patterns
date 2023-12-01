@@ -2,6 +2,8 @@ package com.example.model;
 
 import org.junit.jupiter.api.Test;
 
+import com.example.controller.PlayerController;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -38,9 +40,10 @@ public class PlayerTest {
     public void testGenerateRandomMoveComputer() {
         Player player = new Player("AI", PlayerType.COMPUTER);
         GameMode gameMode = new GameMode(GameDifficulty.CLASSIC, player, new Player("Human", PlayerType.HUMAN), null, null);
+        PlayerController playerController = new PlayerController(gameMode);
         player.setGameMode(gameMode);
 
-        char[] randomMove = player.generateRandomMove();
+        char[] randomMove = playerController.generateRandomMove();
 
         assertNotNull(randomMove);
         assertEquals(4, randomMove.length);

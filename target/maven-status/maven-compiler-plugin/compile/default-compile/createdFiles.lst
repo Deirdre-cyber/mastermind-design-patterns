@@ -4,14 +4,15 @@ com\example\view\GameView.class
 com\example\Main.class
 com\example\view\LeaderboardView.class
 com\example\model\Leaderboard$1.class
+com\example\controller\PlayerController.class
 com\example\model\GameMode$1.class
 com\example\model\Player.class
 com\example\controller\GameController.class
 com\example\model\GameDifficulty.class
 com\example\model\GameMode.class
 com\example\model\Leaderboard.class
-com\example\model\Player$1.class
 com\example\model\Game.class
 com\example\model\ComputerPlayerFactory.class
+com\example\controller\PlayerController$1.class
 com\example\model\HumanPlayerFactory.class
 com\example\model\PlayerType.class
