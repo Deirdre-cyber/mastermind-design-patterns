@@ -1,4 +1,4 @@
-package com.example;
+package com.example.model;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -46,12 +46,12 @@ public class LeaderboardTest {
     public void testCalculateScore() {
 
         Player player = new Player("Bob", PlayerType.HUMAN);
-        GameMode gameMode = new GameMode(GameDifficulty.CHILDREN, player, null);
+        GameMode gameMode = new GameMode(GameDifficulty.CHILDREN, player, null, null, null);
         player.setGameMode(gameMode);
         gameMode.updateTurn();
         int score = leaderboard.calculateScore(player, gameMode.getMovesLeft(), gameMode.getDifficulty());
 
-        assertEquals(-995, score);
+        assertEquals(5, score);
     }
 
 

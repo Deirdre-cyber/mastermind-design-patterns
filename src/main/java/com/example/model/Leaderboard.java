@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.example.view.LeaderboardView;
+
 public class Leaderboard {
     private static Leaderboard instance;
+    private LeaderboardView leaderboardView = new LeaderboardView();
 
     private List<PlayerScore> scores;
 
@@ -42,7 +45,7 @@ public class Leaderboard {
                 scores.add(new PlayerScore(playerTwo.getName(), scoreTwo));
     
                 Collections.sort(scores);
-                displayLeaderboard();
+                leaderboardView.displayLeaderboard(scores);
                 saveLeaderboard();
             }
         } else {
@@ -72,37 +75,7 @@ public class Leaderboard {
         return score + difficultyBonus;
     }
 
-    public void displayLeaderboard() {
-        int boxWidth = 30;
     
-        printBorder(boxWidth);
-    
-        System.out.println("| Leaderboard:");
-        System.out.println("| Player\t\tScore");
-    
-        for (PlayerScore score : scores) {
-            printRow("| " + score.getPlayerName(), "\t\t" + score.getScore(), boxWidth);
-        }
-    
-        printBorder(boxWidth);
-    }
-    
-    private void printRow(String label, String value, int boxWidth) {
-        System.out.print(label);
-    
-        for (int i = label.length(); i < boxWidth - value.length() - 1; i++) {
-            System.out.print(" ");
-        }
-    
-        System.out.println(value + "|");
-    }
-    
-    private void printBorder(int boxWidth) {
-        for (int i = 0; i < boxWidth; i++) {
-            System.out.print("-");
-        }
-        System.out.println();
-    }
     
     private void loadLeaderboard() {
         boolean skipFirstLine = true;
@@ -146,29 +119,6 @@ public class Leaderboard {
             }
         } catch (IOException e) {
             System.err.println("Error saving leaderboard: " + e.getMessage());
-        }
-    }
-    
-    private static class PlayerScore implements Comparable<PlayerScore> {
-        private String playerName;
-        private int score;
-
-        public PlayerScore(String playerName, int score) {
-            this.playerName = playerName;
-            this.score = score;
-        }
-
-        public String getPlayerName() {
-            return playerName;
-        }
-
-        public int getScore() {
-            return score;
-        }
-
-        @Override
-        public int compareTo(PlayerScore other) {
-            return Integer.compare(other.score, this.score);
         }
     }
 }

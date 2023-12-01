@@ -1,11 +1,6 @@
-package com.example;
+package com.example.model;
 
 import org.junit.jupiter.api.Test;
-
-import com.example.model.GameDifficulty;
-import com.example.model.GameMode;
-import com.example.model.Player;
-import com.example.model.PlayerType;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,7 +22,7 @@ public class PlayerTest {
     @Test
     public void testSetGameMode() {
         Player player = new Player("John", PlayerType.HUMAN);
-        GameMode gameMode = new GameMode(GameDifficulty.CLASSIC, player, new Player("AI", PlayerType.COMPUTER));
+        GameMode gameMode = new GameMode(GameDifficulty.CLASSIC, player, new Player("AI", PlayerType.COMPUTER), null, null);
         player.setGameMode(gameMode);
         assertEquals(gameMode, player.getGameMode());
     }
@@ -42,7 +37,7 @@ public class PlayerTest {
     @Test
     public void testGenerateRandomMoveComputer() {
         Player player = new Player("AI", PlayerType.COMPUTER);
-        GameMode gameMode = new GameMode(GameDifficulty.CLASSIC, player, new Player("Human", PlayerType.HUMAN));
+        GameMode gameMode = new GameMode(GameDifficulty.CLASSIC, player, new Player("Human", PlayerType.HUMAN), null, null);
         player.setGameMode(gameMode);
 
         char[] randomMove = player.generateRandomMove();

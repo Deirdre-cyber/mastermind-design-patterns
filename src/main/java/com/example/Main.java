@@ -3,6 +3,7 @@ package com.example;
 
 import java.util.Scanner;
 
+import com.example.controller.GameController;
 import com.example.model.ComputerPlayerFactory;
 import com.example.model.Game;
 import com.example.model.GameDifficulty;
@@ -19,16 +20,17 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Game game = null;
         GameView gameView = new GameView();
+        GameController gameController = new GameController(gameView);
         
 
         while (game == null) {
             try {
                 gameView.displayWelcomeMessage();
 
-                GameDifficulty gameDifficulty = gameView.chooseGameDifficulty(scanner);
+                GameDifficulty gameDifficulty = gameController.chooseGameDifficulty(scanner);
 
                 PlayerFactory humanPlayerFactory = new HumanPlayerFactory();
-                String playerOneName = gameView.choosePlayerName(scanner);
+                String playerOneName = gameController.choosePlayerName(scanner);
                 Player playerOne = humanPlayerFactory.createPlayer(playerOneName);
 
                 gameView.getLineSeperator();
@@ -37,7 +39,7 @@ public class Main {
                 String playerTwoName = gameView.generatePlayerName();
                 Player playerTwo = computerPlayerFactory.createPlayer(playerTwoName);
 
-                GameMode gameMode = new GameMode(gameDifficulty, playerOne, playerTwo, gameView);
+                GameMode gameMode = new GameMode(gameDifficulty, playerOne, playerTwo, gameView, gameController);
                 
                 playerOne.setGameMode(gameMode);
                 playerTwo.setGameMode(gameMode);
@@ -47,7 +49,7 @@ public class Main {
                 gameView.getLineSeperator();
 
                 Leaderboard leaderboard = Leaderboard.getInstance();
-                game = new Game(playerOne, playerTwo, gameMode, leaderboard);
+                game = new Game(playerOne, playerTwo, gameMode, leaderboard, gameView);
 
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid input. Please enter a valid game difficulty.");

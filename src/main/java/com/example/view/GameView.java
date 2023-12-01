@@ -1,8 +1,8 @@
 package com.example.view;
 
-import java.util.Scanner;
+import java.util.Arrays;
 
-import com.example.model.GameDifficulty;
+import com.example.model.GameMode;
 
 public class GameView {
 
@@ -22,36 +22,6 @@ public class GameView {
 
     public String getLineSeperator() {
         return LINE_SEPERATOR;
-    }
-
-    public GameDifficulty chooseGameDifficulty(Scanner scanner) {
-        System.out.println("Enter game difficulty ((CH)ILDREN, (CL)ASSIC, (E)XPERT):");
-        String input = scanner.nextLine().toUpperCase();
-        System.out.println(LINE_SEPERATOR);
-        
-        GameDifficulty gameDifficulty;
-
-        switch (input) {
-            case "CH":
-                gameDifficulty = GameDifficulty.CHILDREN;
-                break;
-            case "CL":
-                gameDifficulty = GameDifficulty.CLASSIC;
-                break;
-            case "E":
-                gameDifficulty = GameDifficulty.EXPERT;
-                break;
-            default:
-                System.out.println("Invalid input. Defaulting to CLASSIC.");
-                gameDifficulty = GameDifficulty.CLASSIC;
-                break;
-        }
-        return gameDifficulty;
-    }
-
-    public String choosePlayerName(Scanner scanner) {
-        System.out.println("Enter player one name:");
-        return scanner.nextLine();
     }
 
     public String generatePlayerName() {
@@ -74,4 +44,72 @@ public class GameView {
         }
         System.out.println("+");
     }
+
+    public void displayGuessesAndHints(char[] guess, String[] hints) {
+        int boxWidth = 30;
+
+        printBorder(boxWidth);
+
+        printRow("Guess:", guess, boxWidth);
+
+        printRow("Hints:", hints, boxWidth);
+
+        printBorder(boxWidth);
+
+        System.out.println("O = correct colour, correct position");
+        System.out.println("X = correct colour, wrong position");
+        System.out.println("_ = wrong colour");
+        System.out.println();
+    }
+
+    private void printRow(String label, char[] data, int boxWidth) {
+        System.out.print("| " + label + " ");
+        for (char c : data) {
+            System.out.print(c + " ");
+        }
+
+        for (int i = label.length() + data.length * 2 + 2; i < boxWidth - 1; i++) {
+            System.out.print(" ");
+        }
+
+        System.out.println("|");
+    }
+
+    private void printRow(String label, String[] data, int boxWidth) {
+        System.out.print("| " + label + " ");
+        for (String value : data) {
+            System.out.print(value + " ");
+        }
+
+        for (int i = label.length() + data.length * 2 + 2; i < boxWidth - 1; i++) {
+            System.out.print(" ");
+        }
+
+        System.out.println("|");
+    }
+
+    private void printBorder(int boxWidth) {
+        for (int i = 0; i < boxWidth; i++) {
+            System.out.print("-");
+        }
+        System.out.println();
+    }
+
+        public void displayResult(GameMode gameMode, char[] solution) {
+        if (gameMode.isGameFinished()) {
+            if (gameMode.getGameIsWon()) {
+                System.out.println("Congratulations! You won!");
+            } else {
+                System.out.println("Game over. You lost!");
+                if (!gameMode.getGameIsWon()) {
+                    System.out.println("Correct answer was: ");
+                    displayInBox(Arrays.toString(solution));
+                }
+            }
+        } else {
+            System.out.println("Game is not finished yet!");
+        }
+    }
+
+
 }
