@@ -40,8 +40,8 @@ public class Leaderboard {
             int movesLeftTwo = gameModeTwo.getMovesLeft();
     
             if (playerOne.getPlayerType() == PlayerType.HUMAN && playerTwo.getPlayerType() == PlayerType.COMPUTER) {
-                int scoreOne = leaderboardController.calculateScore(playerOne, movesLeftOne, gameModeOne.getDifficulty());
-                int scoreTwo = leaderboardController.calculateScore(playerTwo, movesLeftTwo, gameModeTwo.getDifficulty());
+                int scoreOne = leaderboardController.calculateScore(movesLeftOne, gameModeOne.getDifficulty());
+                int scoreTwo = leaderboardController.calculateScore(movesLeftTwo, gameModeTwo.getDifficulty());
     
                 scores.add(new PlayerScore(playerOne.getName(), scoreOne));
                 scores.add(new PlayerScore(playerTwo.getName(), scoreTwo));

@@ -1,6 +1,5 @@
 package com.example.view;
 
-import java.io.IOException;
 import java.util.List;
 
 import com.example.model.PlayerScore;

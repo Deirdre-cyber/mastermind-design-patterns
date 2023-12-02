@@ -46,7 +46,7 @@ public class LeaderboardTest {
         player.setGameMode(gameMode);
         gameMode.updateTurn();
         LeaderboardController leaderboardController = new LeaderboardController();
-        int score = leaderboardController.calculateScore(player, gameMode.getMovesLeft(), gameMode.getDifficulty());
+        int score = leaderboardController.calculateScore(gameMode.getMovesLeft(), gameMode.getDifficulty());
 
         assertEquals(5, score);
     }

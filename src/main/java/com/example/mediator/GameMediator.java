@@ -39,7 +39,7 @@ public class GameMediator {
                 gameView.displayStartGameMessage(playerOne.getName(), playerTwo.getName());
 
                 leaderboard = Leaderboard.getInstance();
-                game = new Game(playerOne, playerTwo, this);
+                game = new Game(this);
 
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid input. Please enter a valid game difficulty.");
