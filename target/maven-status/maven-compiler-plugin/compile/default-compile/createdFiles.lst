@@ -1,11 +1,11 @@
 com\example\factory\ComputerPlayerFactory.class
 com\example\model\PlayerScore.class
+com\example\factory\ChildrenSolutionInitialisationStrategy.class
 com\example\view\GameView.class
 com\example\Main.class
 com\example\view\LeaderboardView.class
 com\example\controller\LeaderboardController$1.class
 com\example\controller\PlayerController.class
-com\example\model\GameMode$1.class
 com\example\model\Player.class
 com\example\mediator\GameMediator.class
 com\example\controller\GameController.class
@@ -15,6 +15,10 @@ com\example\model\Leaderboard.class
 com\example\controller\LeaderboardController.class
 com\example\model\Game.class
 com\example\factory\HumanPlayerFactory.class
+com\example\factory\SolutionInitialisationStrategyFactory.class
 com\example\factory\PlayerFactory.class
+com\example\factory\ExpertSolutionInitialisationStrategy.class
 com\example\controller\PlayerController$1.class
+com\example\factory\ClassicSolutionInitialisationStrategy.class
 com\example\model\PlayerType.class
+com\example\factory\SolutionInitialisationStrategy.class

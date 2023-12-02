@@ -2,9 +2,13 @@ C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\mi
 C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\model\Game.java
 C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\controller\PlayerController.java
 C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\view\GameView.java
+C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\factory\ExpertSolutionInitialisationStrategy.java
+C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\factory\SolutionInitialisationStrategyFactory.java
 C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\controller\LeaderboardController.java
 C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\factory\HumanPlayerFactory.java
 C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\Main.java
+C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\factory\ClassicSolutionInitialisationStrategy.java
+C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\factory\ChildrenSolutionInitialisationStrategy.java
 C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\model\GameMode.java
 C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\view\LeaderboardView.java
 C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\model\Leaderboard.java
@@ -15,3 +19,4 @@ C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\mi
 C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\model\PlayerType.java
 C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\mediator\GameMediator.java
 C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\factory\PlayerFactory.java
+C:\Users\Deirdre\Desktop\Fourth Year\2. Design Patterns\Assignment\Mastermind\miniproject\DPSystem\mastermind\src\main\java\com\example\factory\SolutionInitialisationStrategy.java
