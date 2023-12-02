@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.security.SecureRandom;
 import java.util.Scanner;
 
 import com.example.factory.SolutionInitialisationStrategyFactory;
@@ -50,7 +51,8 @@ public class PlayerController {
         char[] code = new char[4];
     
         for (int i = 0; i < code.length; i++) {
-            int randomIndex = (int) (Math.random() * colours.length);
+            SecureRandom random = new SecureRandom();
+            int randomIndex = random.nextInt(colours.length);
             code[i] = colours[randomIndex];
         }
         return code;

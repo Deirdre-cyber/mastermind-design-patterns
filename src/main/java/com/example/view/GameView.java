@@ -1,5 +1,6 @@
 package com.example.view;
 
+import java.security.SecureRandom;
 import java.util.Arrays;
 
 import com.example.model.GameMode;
@@ -35,7 +36,8 @@ public class GameView {
 
     public String generateComputerPlayerName() {
         String[] names = { "John", "Jane", "Bob", "Alice", "Jack", "Jill", "Bill", "Ben", "Sam", "Sally" };
-        int randomIndex = (int) (Math.random() * names.length);
+        SecureRandom random = new SecureRandom();
+        int randomIndex = random.nextInt(names.length);
         return names[randomIndex].toUpperCase();
     }
 

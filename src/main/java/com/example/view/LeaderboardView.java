@@ -46,17 +46,14 @@ public class LeaderboardView {
     }
 
     public void getLeaderBoardError(Exception e){
-        e.printStackTrace();
         System.err.println("Error loading leaderboard: " + e.getMessage());
     }
 
     public void storeLeaderboardError(Exception e){
-        e.printStackTrace();
         System.err.println("Error saving leaderboard: " + e.getMessage());
     }
 
     public void createLeaderboardError(Exception e){
-        e.printStackTrace();
         System.err.println("Error creating leaderboard file: " + e.getMessage());
     }
 }
