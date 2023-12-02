@@ -22,5 +22,9 @@ public class GameModeTest {
         GameMode gameMode = new GameMode(GameDifficulty.CLASSIC, player, player, null);
         gameMode.initialiseSolution(GameDifficulty.CLASSIC);
 
+        char[] guess = { 'R', 'R', 'R', 'R' };
+        String[] hints = gameMode.compareCode(guess, gameMode.getSolution());
+
+        assertEquals("_", hints[0]);
     }
 }
