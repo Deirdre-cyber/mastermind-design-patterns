@@ -33,7 +33,7 @@ public class GameView {
         this.getLineSeperator();
     }
 
-    public String generatePlayerName() {
+    public String generateComputerPlayerName() {
         String[] names = { "John", "Jane", "Bob", "Alice", "Jack", "Jill", "Bill", "Ben", "Sam", "Sally" };
         int randomIndex = (int) (Math.random() * names.length);
         return names[randomIndex].toUpperCase();

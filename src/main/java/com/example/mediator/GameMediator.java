@@ -68,7 +68,7 @@ public class GameMediator {
         gameView.getLineSeperator();
 
         PlayerFactory computerPlayerFactory = new ComputerPlayerFactory();
-        String playerTwoName = gameView.generatePlayerName();
+        String playerTwoName = gameView.generateComputerPlayerName();
         playerTwo = computerPlayerFactory.createPlayer(playerTwoName);
     }
 
