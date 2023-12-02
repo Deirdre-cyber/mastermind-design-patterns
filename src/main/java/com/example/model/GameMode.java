@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.example.controller.PlayerController;
+import com.example.factory.SolutionInitialisationStrategy;
+import com.example.factory.SolutionInitialisationStrategyFactory;
 import com.example.mediator.GameMediator;
 
 //class for managing game logic
@@ -70,7 +72,7 @@ public class GameMode {
             int gameCount = i + 1;
 
             System.out.println("Starting game: " + gameCount);
-            initializeSolution(difficulty);
+            initialiseSolution(difficulty);
             System.out.println("Available colours: " + Arrays.toString(colours));
 
             gameMediator.getLineSeperator();
@@ -121,23 +123,10 @@ public class GameMode {
         gameMediator.displayGuessesAndHints(guess, hints);
     }
 
-    public void initializeSolution(GameDifficulty difficulty) {
-
-        //use map with strategy pattern
-        switch (difficulty) {
-            case CHILDREN:
-                colours = new char[] { 'r', 'g', 'b', 'y' };
-                break;
-            case CLASSIC:
-                colours = new char[] { 'w', 'y', 'o', 'r', 'p', 'b', 'g', 'v' };
-                break;
-            case EXPERT:
-                colours = new char[] { 'w', 'y', 'o', 'r', 'p', 'b', 'g', 'v', 'c', 'm' };
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid difficulty level");
-        }
-
+    public void initialiseSolution(GameDifficulty difficulty) {
+        SolutionInitialisationStrategyFactory strategyFactory = new SolutionInitialisationStrategyFactory();
+        SolutionInitialisationStrategy strategy = strategyFactory.getStrategy(difficulty);
+        colours = strategy.initialiseSolution();
         solution = generateRandomSolution(colours);
     }
 

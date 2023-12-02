@@ -1,11 +1,14 @@
 package com.example.mediator;
 
+import java.util.Map;
 import java.util.Scanner;
 
 import com.example.controller.GameController;
 import com.example.factory.ComputerPlayerFactory;
 import com.example.factory.HumanPlayerFactory;
 import com.example.factory.PlayerFactory;
+import com.example.factory.SolutionInitialisationStrategy;
+import com.example.factory.SolutionInitialisationStrategyFactory;
 import com.example.model.*;
 import com.example.view.GameView;
 
@@ -84,22 +87,21 @@ public class GameMediator {
 
         gameView.getLineSeperator();
 
-        GameDifficulty gameDifficulty;
+        Map<String, GameDifficulty> difficultyMap = Map.of(
+                "CH", GameDifficulty.CHILDREN,
+                "CL", GameDifficulty.CLASSIC,
+                "E", GameDifficulty.EXPERT);
 
-        switch (input) {
-            case "CH":
-                gameDifficulty = GameDifficulty.CHILDREN;
-                break;
-            case "CL":
-                gameDifficulty = GameDifficulty.CLASSIC;
-                break;
-            case "E":
-                gameDifficulty = GameDifficulty.EXPERT;
-                break;
-            default:
-                System.out.println("Invalid input. Defaulting to CLASSIC.");
-                gameDifficulty = GameDifficulty.CLASSIC;
-                break;
+        GameDifficulty gameDifficulty;
+        
+        try {
+            SolutionInitialisationStrategyFactory strategyFactory = new SolutionInitialisationStrategyFactory();
+            SolutionInitialisationStrategy strategy = strategyFactory.getStrategy(GameDifficulty.valueOf(difficultyMap.get(input).toString()));
+
+            gameDifficulty = strategy.chooseGameDifficulty();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid input. Defaulting to CLASSIC.");
+            gameDifficulty = GameDifficulty.CLASSIC;
         }
         return gameDifficulty;
     }

@@ -10,7 +10,7 @@ public class GameModeTest {
     @Test
     public void testInitializeSolution() {
         GameMode gameMode = new GameMode(GameDifficulty.CLASSIC, new Player("Player1", PlayerType.HUMAN), new Player("Player2", PlayerType.COMPUTER), null);
-        gameMode.initializeSolution(GameDifficulty.CLASSIC);
+        gameMode.initialiseSolution(GameDifficulty.CLASSIC);
         assertNotNull(gameMode.getSolution());
         assertEquals(4, gameMode.getSolution().length);
     }
@@ -20,7 +20,7 @@ public class GameModeTest {
 
         Player player = mock(Player.class);
         GameMode gameMode = new GameMode(GameDifficulty.CLASSIC, player, player, null);
-        gameMode.initializeSolution(GameDifficulty.CLASSIC);
+        gameMode.initialiseSolution(GameDifficulty.CLASSIC);
 
     }
 }
