@@ -82,36 +82,30 @@ public class GameMediator {
 
     private GameDifficulty chooseGameDifficulty() {
         System.out.println("Enter game difficulty ((CH)ILDREN, (CL)ASSIC, (E)XPERT):");
-
+    
         String input = scanner.nextLine().toUpperCase();
-
         gameView.getLineSeperator();
-
+    
         Map<String, GameDifficulty> difficultyMap = Map.of(
                 "CH", GameDifficulty.CHILDREN,
                 "CL", GameDifficulty.CLASSIC,
                 "E", GameDifficulty.EXPERT);
-
-        GameDifficulty gameDifficulty;
-        
+    
         try {
-            SolutionInitialisationStrategyFactory strategyFactory = new SolutionInitialisationStrategyFactory();
-            SolutionInitialisationStrategy strategy = strategyFactory.getStrategy(GameDifficulty.valueOf(difficultyMap.get(input).toString()));
-
-            gameDifficulty = strategy.chooseGameDifficulty();
+            return difficultyMap.getOrDefault(input, GameDifficulty.CLASSIC);
         } catch (IllegalArgumentException e) {
             System.out.println("Invalid input. Defaulting to CLASSIC.");
-            gameDifficulty = GameDifficulty.CLASSIC;
+            return GameDifficulty.CLASSIC;
         }
-        return gameDifficulty;
     }
+    
 
     public String choosePlayerName() {
         System.out.println("Enter player one name:");
         return scanner.nextLine();
     }
 
-    public void initializeGameSettings() {
+    public void initialiseGameSettings() {
         gameController.setNumberOfGames();
         gameController.setNumberOfGuesses();
     }

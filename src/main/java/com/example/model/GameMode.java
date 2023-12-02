@@ -64,7 +64,7 @@ public class GameMode {
 
     public void startGameMode() {
         gameMediator.displayStartGameModeMessage(name);
-        gameMediator.initializeGameSettings();
+        gameMediator.initialiseGameSettings();
 
         movesLeft = gameMediator.getNumGuesses();
 
