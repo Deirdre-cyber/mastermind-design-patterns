@@ -1,6 +1,4 @@
-package com.example.factory;
-
-import com.example.model.GameDifficulty;
+package com.example.strategy;
 
 public interface SolutionInitialisationStrategy {
     char[] initialiseSolution();

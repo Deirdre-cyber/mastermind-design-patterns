@@ -3,6 +3,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.example.model.GameDifficulty;
+import com.example.strategy.ChildrenSolutionInitialisationStrategy;
+import com.example.strategy.ClassicSolutionInitialisationStrategy;
+import com.example.strategy.ExpertSolutionInitialisationStrategy;
+import com.example.strategy.SolutionInitialisationStrategy;
 
 public class SolutionInitialisationStrategyFactory {
 

@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.example.controller.PlayerController;
-import com.example.factory.SolutionInitialisationStrategy;
 import com.example.factory.SolutionInitialisationStrategyFactory;
 import com.example.mediator.GameMediator;
+import com.example.strategy.SolutionInitialisationStrategy;
 
 //class for managing game logic
 public class GameMode {

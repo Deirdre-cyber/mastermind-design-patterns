@@ -1,4 +1,4 @@
-package com.example.factory;
+package com.example.strategy;
 
 public class ChildrenSolutionInitialisationStrategy implements SolutionInitialisationStrategy {
 

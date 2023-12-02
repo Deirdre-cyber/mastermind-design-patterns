@@ -1,4 +1,4 @@
-package com.example.factory;
+package com.example.strategy;
 
 public class ExpertSolutionInitialisationStrategy implements SolutionInitialisationStrategy {
 
@@ -6,5 +6,4 @@ public class ExpertSolutionInitialisationStrategy implements SolutionInitialisat
     public char[] initialiseSolution() {
         return new char[] { 'w', 'y', 'o', 'r', 'p', 'b', 'g', 'v', 'c', 'm' };
     }
-
 }

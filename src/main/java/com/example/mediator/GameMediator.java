@@ -7,8 +7,6 @@ import com.example.controller.GameController;
 import com.example.factory.ComputerPlayerFactory;
 import com.example.factory.HumanPlayerFactory;
 import com.example.factory.PlayerFactory;
-import com.example.factory.SolutionInitialisationStrategy;
-import com.example.factory.SolutionInitialisationStrategyFactory;
 import com.example.model.*;
 import com.example.view.GameView;
 
@@ -99,7 +97,6 @@ public class GameMediator {
         }
     }
     
-
     public String choosePlayerName() {
         System.out.println("Enter player one name:");
         return scanner.nextLine();
