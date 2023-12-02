@@ -1,5 +1,6 @@
 package com.example.view;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.example.model.PlayerScore;
@@ -38,5 +39,24 @@ public class LeaderboardView {
             System.out.print("-");
         }
         System.out.println();
+    }
+
+    public void getErrorMessage() {
+        System.out.println("GameMode is null for one or both players. Unable to update leaderboard.");
+    }
+
+    public void getLeaderBoardError(Exception e){
+        e.printStackTrace();
+        System.err.println("Error loading leaderboard: " + e.getMessage());
+    }
+
+    public void storeLeaderboardError(Exception e){
+        e.printStackTrace();
+        System.err.println("Error saving leaderboard: " + e.getMessage());
+    }
+
+    public void createLeaderboardError(Exception e){
+        e.printStackTrace();
+        System.err.println("Error creating leaderboard file: " + e.getMessage());
     }
 }

@@ -3,28 +3,24 @@ package com.example.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
-import com.example.controller.GameController;
 import com.example.controller.PlayerController;
-import com.example.view.GameView;
+import com.example.mediator.GameMediator;
 
+//class for managing game logic
 public class GameMode {
     private String name;
     private boolean gameIsWon;
     private int movesLeft;
     private char[] solution;
     private char[] colours;
-    private int numGames;
-    private int numGuesses;
     private int currentTurn;
     private GameDifficulty difficulty;
     private Player playerOne;
     private Player playerTwo;
-    private GameView gameView;
-    private GameController gameController;
+    private GameMediator gameMediator;
 
-    public GameMode(GameDifficulty difficulty, Player playerOne, Player playerTwo, GameView gameView, GameController gameController) {
+    public GameMode(GameDifficulty difficulty, Player playerOne, Player playerTwo, GameMediator gameMediator) {
         this.difficulty = difficulty;
         this.name = difficulty.toString();
         this.gameIsWon = false;
@@ -32,8 +28,7 @@ public class GameMode {
         this.movesLeft = 0;
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
-        this.gameView = gameView;
-        this.gameController = gameController;
+        this.gameMediator = gameMediator;
 
     }
 
@@ -45,55 +40,44 @@ public class GameMode {
         return currentTurn;
     }
 
-    public boolean isGameFinished() {
-        return gameIsWon || movesLeft == 0;
+        public void updateTurn() {
+        currentTurn++;
     }
 
-    public void updateTurn() {
-        currentTurn++;
+    public boolean isGameFinished() {
+        return gameIsWon || movesLeft == 0;
     }
 
     public int getMovesLeft() {
         return movesLeft;
     }
 
-    public boolean getGameIsWon() {
+    public boolean isGameWon() {
         return gameIsWon;
-    }
-
-    public Player getPlayerOne() {
-        return playerOne;
     }
 
     public char[] getSolution() {
         return solution;
     }
 
-    public void startGame() {
+    public void startGameMode() {
+        gameMediator.displayStartGameModeMessage(name);
+        gameMediator.initializeGameSettings();
 
-        System.out.println("Starting game mode: " + name);
+        movesLeft = gameMediator.getNumGuesses();
 
-        gameView.getLineSeperator();
-
-        setNumberOfGames();
-        setNumberOfGuesses();
-
-        gameView.getLineSeperator();
-
-        movesLeft = numGuesses;
-
-        for (int i = 0; i < numGames && !isGameFinished(); i++) {
+        for (int i = 0; i < movesLeft && !isGameFinished(); i++) {
             int gameCount = i + 1;
-            System.out.println("Starting game: " + gameCount);
 
+            System.out.println("Starting game: " + gameCount);
             initializeSolution(difficulty);
             System.out.println("Available colours: " + Arrays.toString(colours));
 
-            for (int j = 0; j < numGuesses && !isGameFinished(); j++) {
+            gameMediator.getLineSeperator();
+
+            for (int j = 0; j < movesLeft && !isGameFinished(); j++) {
                 System.out.println("Turn: " + (j + 1));
-
                 makeMove(playerOne);
-
                 if (gameIsWon) {
                     break;
                 }
@@ -101,35 +85,12 @@ public class GameMode {
         }
     }
 
-    private void setNumberOfGames() {
-        do {
-            numGames = gameController.promptForNumberOfGames();
-        } while (numGames < 1 || numGames > 10);
-    }
-
-    private void setNumberOfGuesses() {
-        do {
-            numGuesses = gameController.promptForNumberOfGuesses();
-        } while (this.numGuesses < 1 || this.numGuesses > 10);
-    }
-
-    public void makeMove(Player player) {
-        char[] guess;
-        String[] hints;
-        PlayerController playerController = new PlayerController(this);
+    private void makeMove(Player player) {
 
         if (player.getPlayerType() == PlayerType.HUMAN) {
-            
-            playerController.makeMove(player);
-            guess = player.getLastMove();
-            hints = compareCode(guess, solution);
-            gameView.displayGuessesAndHints(guess, hints);
+            handleHumanPlayerMove(player);
         } else {
-            gameView.getLineSeperator();
-            System.out.println("Computer " + player.getName() + " is making a move...");
-            guess = playerController.generateRandomMove();
-            hints = compareCode(guess, solution);
-            gameView.displayGuessesAndHints(guess, hints);
+            handleComputerPlayerMove(player);
         }
 
         if (!isGameFinished()) {
@@ -142,7 +103,27 @@ public class GameMode {
         }
     }
 
+    private void handleHumanPlayerMove(Player player) {
+        PlayerController playerController = new PlayerController(this);
+        playerController.makeMove(player);
+        char[] guess = player.getLastMove();
+        String[] hints = compareCode(guess, solution);
+        gameMediator.displayGuessesAndHints(guess, hints);
+    }
+
+    private void handleComputerPlayerMove(Player player) {
+        gameMediator.getLineSeperator();
+        System.out.println("Computer " + player.getName() + " is making a move...");
+
+        PlayerController playerController = new PlayerController(this);
+        char[] guess = playerController.generateRandomMove();
+        String[] hints = compareCode(guess, solution);
+        gameMediator.displayGuessesAndHints(guess, hints);
+    }
+
     public void initializeSolution(GameDifficulty difficulty) {
+
+        //use map with strategy pattern
         switch (difficulty) {
             case CHILDREN:
                 colours = new char[] { 'r', 'g', 'b', 'y' };
@@ -161,7 +142,8 @@ public class GameMode {
     }
 
     private char[] generateRandomSolution(char[] colours) {
-        char[] code = new char[4];
+        final int SOLUTION_LENGTH = 4;
+        char[] code = new char[SOLUTION_LENGTH];
 
         List<Character> colourList = new ArrayList<>();
         for (char colour : colours) {
@@ -177,7 +159,6 @@ public class GameMode {
     }
 
     public void placeMove(Player player, char[] guess) {
-
         String[] hints = compareCode(guess, solution);
 
         if (checkWin(hints)) {
@@ -214,7 +195,7 @@ public class GameMode {
         return hints;
     }
 
-    public boolean checkWin(String[] hints) {
+    private boolean checkWin(String[] hints) {
         for (String hint : hints) {
             if (!hint.equals("O")) {
                 return false;

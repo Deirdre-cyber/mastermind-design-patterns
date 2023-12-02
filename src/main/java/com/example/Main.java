@@ -2,58 +2,19 @@
 package com.example;
 
 import com.example.controller.GameController;
-import com.example.model.ComputerPlayerFactory;
+import com.example.mediator.GameMediator;
 import com.example.model.Game;
-import com.example.model.GameDifficulty;
-import com.example.model.GameMode;
-import com.example.model.HumanPlayerFactory;
-import com.example.model.Leaderboard;
-import com.example.model.Player;
-import com.example.model.PlayerFactory;
 import com.example.view.GameView;
 
 public class Main {
 
     public static void main(String[] args) {
-        Game game = null;
+
         GameView gameView = new GameView();
-        GameController gameController = new GameController(gameView);
-        
-
-        while (game == null) {
-            try {
-                gameView.displayWelcomeMessage();
-
-                GameDifficulty gameDifficulty = gameController.chooseGameDifficulty();
-
-                PlayerFactory humanPlayerFactory = new HumanPlayerFactory();
-                String playerOneName = gameController.choosePlayerName();
-                Player playerOne = humanPlayerFactory.createPlayer(playerOneName);
-
-                gameView.getLineSeperator();
-
-                PlayerFactory computerPlayerFactory = new ComputerPlayerFactory();
-                String playerTwoName = gameView.generatePlayerName();
-                Player playerTwo = computerPlayerFactory.createPlayer(playerTwoName);
-
-                GameMode gameMode = new GameMode(gameDifficulty, playerOne, playerTwo, gameView, gameController);
-                
-                playerOne.setGameMode(gameMode);
-                playerTwo.setGameMode(gameMode);
-
-                System.out.println("Let's play " + playerOne.getName() + " and " + playerTwo.getName() + "!");
-
-                gameView.getLineSeperator();
-
-                Leaderboard leaderboard = Leaderboard.getInstance();
-                game = new Game(playerOne, playerTwo, gameMode, leaderboard, gameView);
-
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid input. Please enter a valid game difficulty.");
-            }
-        }
+        GameController gameController = new GameController();
+        GameMediator gameMediator = new GameMediator(gameController, gameView);
+        Game game = gameMediator.initializeGame();
 
         game.start();
     }
-
 }

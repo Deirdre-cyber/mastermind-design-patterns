@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.example.controller.LeaderboardController;
 import com.example.view.LeaderboardView;
 
 public class Leaderboard {
     private static Leaderboard instance;
     private LeaderboardView leaderboardView = new LeaderboardView();
+    private LeaderboardController leaderboardController = new LeaderboardController();
 
     private List<PlayerScore> scores;
 
@@ -29,7 +31,7 @@ public class Leaderboard {
         return instance;
     }
 
-    public void update(Player playerOne, Player playerTwo) {
+    public void updateLeaderboard(Player playerOne, Player playerTwo) {
         GameMode gameModeOne = playerOne.getGameMode();
         GameMode gameModeTwo = playerTwo.getGameMode();
     
@@ -38,8 +40,8 @@ public class Leaderboard {
             int movesLeftTwo = gameModeTwo.getMovesLeft();
     
             if (playerOne.getPlayerType() == PlayerType.HUMAN && playerTwo.getPlayerType() == PlayerType.COMPUTER) {
-                int scoreOne = calculateScore(playerOne, movesLeftOne, gameModeOne.getDifficulty());
-                int scoreTwo = calculateScore(playerTwo, movesLeftTwo, gameModeTwo.getDifficulty());
+                int scoreOne = leaderboardController.calculateScore(playerOne, movesLeftOne, gameModeOne.getDifficulty());
+                int scoreTwo = leaderboardController.calculateScore(playerTwo, movesLeftTwo, gameModeTwo.getDifficulty());
     
                 scores.add(new PlayerScore(playerOne.getName(), scoreOne));
                 scores.add(new PlayerScore(playerTwo.getName(), scoreTwo));
@@ -49,30 +51,8 @@ public class Leaderboard {
                 saveLeaderboard();
             }
         } else {
-            System.out.println("GameMode is null for one or both players. Unable to update leaderboard.");
+            leaderboardView.getErrorMessage();
         }
-    }
-
-    int calculateScore(Player player, int movesLeft, GameDifficulty difficulty) {
-
-        int difficultyBonus = 0;
-        int score = movesLeft * 1000;
-
-        switch (difficulty) {
-            case CHILDREN:
-                difficultyBonus = 5;
-                break;
-            case CLASSIC:
-                difficultyBonus = 10;
-                break;
-            case EXPERT:
-                difficultyBonus = 15;
-                break;
-            default:
-                break;
-        }
-
-        return score + difficultyBonus;
     }
 
     private void loadLeaderboard() {
@@ -93,8 +73,7 @@ public class Leaderboard {
         } catch (FileNotFoundException e) {
             createLeaderboardFile();
         } catch (IOException | NumberFormatException e) {
-            e.printStackTrace();
-            System.err.println("Error loading leaderboard: " + e.getMessage());
+            leaderboardView.getLeaderBoardError(e);
         }
     }
     
@@ -103,7 +82,7 @@ public class Leaderboard {
             writer.write(CSV_HEADER);
             writer.newLine();
         } catch (IOException e) {
-            System.err.println("Error creating leaderboard file: " + e.getMessage());
+            leaderboardView.createLeaderboardError(e);
         }
     }
 
@@ -116,7 +95,7 @@ public class Leaderboard {
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.err.println("Error saving leaderboard: " + e.getMessage());
+            leaderboardView.storeLeaderboardError(e);
         }
     }
 }

@@ -6,7 +6,7 @@ import com.example.model.GameMode;
 
 public class GameView {
 
-    private static final String LINE_SEPERATOR = "-----------------------------------";
+    private static final String LINE_SEPERATOR = "\n-----------------------------------";
 
 
     public void displayWelcomeMessage() {
@@ -19,8 +19,18 @@ public class GameView {
         System.out.println("        \\/     \\/     \\/            \\/            \\/        \\/      \\/");
     }
 
-    public String getLineSeperator() {
-        return LINE_SEPERATOR;
+    public void getLineSeperator() {
+        System.out.println(LINE_SEPERATOR);
+    }
+
+    public void displayStartGameModeMessage(String name){
+        System.out.println("Starting game mode: " + name);
+        this.getLineSeperator();
+    }
+
+    public void displayStartGameMessage(String humanPlayer, String computerPlayer){
+        System.out.println("Let's play " + humanPlayer + " and " + computerPlayer + "!");
+        this.getLineSeperator();
     }
 
     public String generatePlayerName() {
@@ -96,11 +106,12 @@ public class GameView {
 
     public void displayResult(GameMode gameMode, char[] solution) {
         if (gameMode.isGameFinished()) {
-            if (gameMode.getGameIsWon()) {
+            if (gameMode.isGameWon()) {
                 System.out.println("Congratulations! You won!");
             } else {
                 System.out.println("Game over. You lost!");
-                if (!gameMode.getGameIsWon()) {
+                this.getLineSeperator();
+                if (!gameMode.isGameWon()) {
                     System.out.println("Correct answer was: ");
                     displayInBox(Arrays.toString(solution));
                 }

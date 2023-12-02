@@ -2,47 +2,22 @@ package com.example.controller;
 
 import java.util.Scanner;
 
-import com.example.model.GameDifficulty;
-import com.example.view.GameView;
-
+//responsible for managing the game settings
 public class GameController {
 
-    private GameView gameView;
+    private int numGames;
+    private int numGuesses;
     private Scanner scanner = new Scanner(System.in);
 
-    public GameController(GameView gameView) {
-        this.gameView = gameView;
+    public GameController() {
     }
 
-    public GameDifficulty chooseGameDifficulty() {
-        System.out.println("Enter game difficulty ((CH)ILDREN, (CL)ASSIC, (E)XPERT):");
-        String input = scanner.nextLine().toUpperCase();
-
-        System.out.println(gameView.getLineSeperator());
-
-        GameDifficulty gameDifficulty;
-
-        switch (input) {
-            case "CH":
-                gameDifficulty = GameDifficulty.CHILDREN;
-                break;
-            case "CL":
-                gameDifficulty = GameDifficulty.CLASSIC;
-                break;
-            case "E":
-                gameDifficulty = GameDifficulty.EXPERT;
-                break;
-            default:
-                System.out.println("Invalid input. Defaulting to CLASSIC.");
-                gameDifficulty = GameDifficulty.CLASSIC;
-                break;
-        }
-        return gameDifficulty;
+    public int getNumGuesses() {
+        return numGuesses;
     }
 
-    public String choosePlayerName() {
-        System.out.println("Enter player one name:");
-        return scanner.nextLine();
+    public int getNumGames() {
+        return numGames;
     }
 
     public int promptForNumberOfGames() {
@@ -51,7 +26,6 @@ public class GameController {
             System.out.println("Invalid input. Please enter a number between 1 and 10.");
             scanner.next();
         }
-        gameView.getLineSeperator();
         return scanner.nextInt();
     }
 
@@ -61,7 +35,18 @@ public class GameController {
             System.out.println("Invalid input. Please enter a number between 1 and 10.");
             scanner.next();
         }
-        gameView.getLineSeperator();
         return scanner.nextInt();
+    }
+
+    public void setNumberOfGames() {
+        do {
+            numGames = this.promptForNumberOfGames();
+        } while (numGames < 1 || numGames > 10);
+    }
+
+    public void setNumberOfGuesses() {
+        do {
+            numGuesses = this.promptForNumberOfGuesses();
+        } while (this.numGuesses < 1 || this.numGuesses > 10);
     }
 }

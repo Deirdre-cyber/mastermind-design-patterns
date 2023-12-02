@@ -1,4 +1,7 @@
-package com.example.model;
+package com.example.factory;
+
+import com.example.model.Player;
+import com.example.model.PlayerType;
 
 public class HumanPlayerFactory implements PlayerFactory{
 
@@ -6,5 +9,4 @@ public class HumanPlayerFactory implements PlayerFactory{
     public Player createPlayer(String name) {
         return new Player(name, PlayerType.HUMAN);
     }
-    
 }

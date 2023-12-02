@@ -3,11 +3,7 @@ package com.example.model;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import com.example.model.GameDifficulty;
-import com.example.model.GameMode;
-import com.example.model.Leaderboard;
-import com.example.model.Player;
-import com.example.model.PlayerType;
+import com.example.controller.LeaderboardController;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
@@ -37,19 +33,20 @@ public class LeaderboardTest {
         gameModeOne.updateTurn();
         gameModeTwo.updateTurn();
 
-        leaderboard.update(playerOne, playerTwo);
+        leaderboard.updateLeaderboard(playerOne, playerTwo);
 
-        verify(leaderboard, times(1)).update(playerOne, playerTwo);
+        verify(leaderboard, times(1)).updateLeaderboard(playerOne, playerTwo);
     }
 
     @Test
     public void testCalculateScore() {
 
         Player player = new Player("Bob", PlayerType.HUMAN);
-        GameMode gameMode = new GameMode(GameDifficulty.CHILDREN, player, null, null, null);
+        GameMode gameMode = new GameMode(GameDifficulty.CHILDREN, player, null, null);
         player.setGameMode(gameMode);
         gameMode.updateTurn();
-        int score = leaderboard.calculateScore(player, gameMode.getMovesLeft(), gameMode.getDifficulty());
+        LeaderboardController leaderboardController = new LeaderboardController();
+        int score = leaderboardController.calculateScore(player, gameMode.getMovesLeft(), gameMode.getDifficulty());
 
         assertEquals(5, score);
     }
