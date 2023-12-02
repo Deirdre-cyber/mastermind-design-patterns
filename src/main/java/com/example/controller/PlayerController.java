@@ -2,9 +2,11 @@ package com.example.controller;
 
 import java.util.Scanner;
 
+import com.example.factory.SolutionInitialisationStrategyFactory;
 import com.example.model.GameMode;
 import com.example.model.Player;
 import com.example.model.PlayerType;
+import com.example.strategy.SolutionInitialisationStrategy;
 
 public class PlayerController {
     
@@ -41,27 +43,15 @@ public class PlayerController {
     }
 
     public char[] generateRandomMove() {
-        char[] colors;
-        
-        switch (gameMode.getDifficulty()) {
-            case CHILDREN:
-                colors = new char[]{'r', 'g', 'b', 'y'};
-                break;
-            case CLASSIC:
-                colors = new char[]{'w', 'y', 'o', 'r', 'p', 'b', 'g', 'v'};
-                break;
-            case EXPERT:
-                colors = new char[]{'w', 'y', 'o', 'r', 'p', 'b', 'g', 'v', 'c', 'm'};
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid difficulty level");
-        }
+        SolutionInitialisationStrategyFactory strategyFactory = new SolutionInitialisationStrategyFactory();
+        SolutionInitialisationStrategy strategy = strategyFactory.getStrategy(gameMode.getDifficulty());
+        char[] colours = strategy.initialiseSolution();
     
         char[] code = new char[4];
     
         for (int i = 0; i < code.length; i++) {
-            int randomIndex = (int) (Math.random() * colors.length);
-            code[i] = colors[randomIndex];
+            int randomIndex = (int) (Math.random() * colours.length);
+            code[i] = colours[randomIndex];
         }
         return code;
     }

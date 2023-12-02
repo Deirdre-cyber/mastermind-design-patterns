@@ -20,5 +20,4 @@ com\example\model\Game.class
 com\example\factory\HumanPlayerFactory.class
 com\example\factory\SolutionInitialisationStrategyFactory.class
 com\example\factory\PlayerFactory.class
-com\example\controller\PlayerController$1.class
 com\example\model\PlayerType.class
