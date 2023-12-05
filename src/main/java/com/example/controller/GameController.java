@@ -9,8 +9,7 @@ public class GameController {
     private int numGuesses;
     private Scanner scanner = new Scanner(System.in);
 
-    public GameController() {
-    }
+
 
     public int getNumGuesses() {
         return numGuesses;
