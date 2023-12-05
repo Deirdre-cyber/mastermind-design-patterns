@@ -2,6 +2,8 @@ package com.example.controller;
 
 import java.util.Scanner;
 
+import com.example.model.GameMode;
+
 //responsible for managing the game settings
 public class GameController {
 
@@ -48,5 +50,5 @@ public class GameController {
         do {
             numGuesses = this.promptForNumberOfGuesses();
         } while (this.numGuesses < 1 || this.numGuesses > 10);
-    }
+    }  
 }

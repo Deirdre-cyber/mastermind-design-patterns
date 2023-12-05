@@ -3,7 +3,7 @@ package com.example.view;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
-import com.example.model.GameMode;
+import com.example.mediator.GameMediator;
 
 public class GameView {
 
@@ -106,14 +106,14 @@ public class GameView {
         System.out.println();
     }
 
-    public void displayResult(GameMode gameMode, char[] solution) {
-        if (gameMode.isGameFinished()) {
-            if (gameMode.isGameWon()) {
+    public void displayResult(GameMediator gameMediator, char[] solution) {
+        if (gameMediator.getIsGameFinished()) {
+            if (gameMediator.getIsGameWon()) {
                 System.out.println("Congratulations! You won!");
             } else {
                 System.out.println("Game over. You lost!");
                 this.getLineSeperator();
-                if (!gameMode.isGameWon()) {
+                if (!gameMediator.getIsGameWon()) {
                     System.out.println("Correct answer was: ");
                     displayInBox(Arrays.toString(solution));
                 }

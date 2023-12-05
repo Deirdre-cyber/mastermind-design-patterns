@@ -52,7 +52,7 @@ public class GameMediator {
     public void startGame() {
 
         gameMode.startGameMode();
-        gameView.displayResult(gameMode, gameMode.getSolution());
+        gameView.displayResult(this, gameMode.getSolution());
         leaderboard.updateLeaderboard(playerOne, playerTwo);
     }
 
@@ -122,4 +122,13 @@ public class GameMediator {
     public int getNumGuesses() {
         return gameController.getNumGuesses();
     }
+
+    public boolean getIsGameFinished(){
+        return gameMode.isGameFinished();
+    }
+
+    public boolean getIsGameWon() {
+        return gameMode.isGameWon();
+    }
 }
+
