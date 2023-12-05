@@ -51,6 +51,7 @@ public class PlayerController {
         char[] code = new char[4];
     
         for (int i = 0; i < code.length; i++) {
+            //6.3.4 Security hotspots addresses - Weak Cryptography
             SecureRandom random = new SecureRandom();
             int randomIndex = random.nextInt(colours.length);
             code[i] = colours[randomIndex];

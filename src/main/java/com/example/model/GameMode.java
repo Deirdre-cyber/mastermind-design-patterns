@@ -1,5 +1,6 @@
 package com.example.model;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -139,8 +140,10 @@ public class GameMode {
             colourList.add(colour);
         }
 
+        //6.3.4 Security hotspots addresses - Weak Cryptography
         for (int i = 0; i < code.length; i++) {
-            int randomIndex = (int) (Math.random() * colourList.size());
+            SecureRandom random = new SecureRandom();
+            int randomIndex = random.nextInt(colourList.size()) ;
             code[i] = colourList.remove(randomIndex);
         }
 
@@ -156,6 +159,7 @@ public class GameMode {
         updateTurn();
     }
 
+    //6.3.3.1 High cognitive complexity - GameMode.compareCode
     public String[] compareCode(char[] guess, char[] solution) {
         String[] hints = new String[guess.length];
 
@@ -167,21 +171,29 @@ public class GameMode {
 
         for (int i = 0; i < guess.length; i++) {
             if (hints[i] == null) {
-                for (int j = 0; j < solution.length; j++) {
-                    if (hints[j] == null && guess[i] == solution[j]) {
-                        hints[j] = "X";
-                    }
-                }
+                markCorrectColourCorrectPosition(guess, solution, hints, i);
             }
         }
 
+        markIncorrectColour(hints);
+
+        return hints;
+    }
+
+    private void markCorrectColourCorrectPosition(char[] guess, char[] solution, String[] hints, int i) {
+        for (int j = 0; j < solution.length; j++) {
+            if (hints[j] == null && guess[i] == solution[j]) {
+                hints[j] = "X";
+            }
+        }
+    }
+
+    private void markIncorrectColour(String[] hints) {
         for (int i = 0; i < hints.length; i++) {
             if (hints[i] == null) {
                 hints[i] = "_";
             }
         }
-
-        return hints;
     }
 
     private boolean checkWin(String[] hints) {

@@ -2,8 +2,6 @@ package com.example.controller;
 
 import java.util.Scanner;
 
-import com.example.model.GameMode;
-
 //responsible for managing the game settings
 public class GameController {
 
