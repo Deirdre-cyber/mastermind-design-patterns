@@ -150,7 +150,7 @@ public class GameMode {
         return code;
     }
 
-    public void placeMove(Player player, char[] guess) {
+    public void placeMove(char[] guess) {
         String[] hints = compareCode(guess, solution);
 
         if (checkWin(hints)) {
