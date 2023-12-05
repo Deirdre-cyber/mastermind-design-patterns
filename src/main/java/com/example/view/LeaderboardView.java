@@ -46,7 +46,7 @@ public class LeaderboardView {
         System.out.println("GameMode is null for one or both players. Unable to update leaderboard.");
     }
 
-    //6.3.3.2 Medium Code Smell - Replace this use of System.err by a logger.
+    //6.3.2.2.1 Medium Code Smell - Replace this use of System.err by a logger.
     public void getLeaderBoardError(Exception e){
         logger.severe("Error getting leaderboard: " + e.getMessage());
     }

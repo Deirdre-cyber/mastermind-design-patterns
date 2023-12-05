@@ -159,7 +159,7 @@ public class GameMode {
         updateTurn();
     }
 
-    //6.3.3.1 High cognitive complexity - GameMode.compareCode
+    //6.3.2.1.2 Cognitive complexity
     public String[] compareCode(char[] guess, char[] solution) {
         String[] hints = new String[guess.length];
 

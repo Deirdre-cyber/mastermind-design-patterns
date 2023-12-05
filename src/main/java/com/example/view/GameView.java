@@ -7,6 +7,7 @@ import com.example.mediator.GameMediator;
 
 public class GameView {
 
+    //6.3.2.1.1 Duplicate String Literals
     private static final String LINE_SEPERATOR = "\n-----------------------------------";
 
 
