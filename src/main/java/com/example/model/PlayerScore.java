@@ -19,18 +19,8 @@ public class PlayerScore implements Comparable<PlayerScore> {
 
     @Override
     public int compareTo(PlayerScore other) {
-        return Integer.compare(other.score, this.score);
+        return Integer.compare(this.score, other.score);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        PlayerScore other = (PlayerScore) obj;
-        return this.score == other.score;
-    }
+    //6.3.2.3.3 Override equals and hashCode when implementing Comparable - have decided to not override as it is not needed for this class and would be redundant code
 }
