@@ -21,4 +21,16 @@ public class PlayerScore implements Comparable<PlayerScore> {
     public int compareTo(PlayerScore other) {
         return Integer.compare(other.score, this.score);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        PlayerScore other = (PlayerScore) obj;
+        return this.score == other.score;
+    }
 }
