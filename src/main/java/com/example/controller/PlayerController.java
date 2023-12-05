@@ -26,7 +26,7 @@ public class PlayerController {
             guess = generateRandomMove();
         }
 
-        gameMode.placeMove(player, guess);
+        gameMode.placeMove(guess);
         player.setLastMove(guess);
         player.setLastHints(gameMode.compareCode(guess, gameMode.getSolution()));
     }
